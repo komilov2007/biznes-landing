@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Studio — Raqamli mahsulotlar studiyasi</title>
+<meta name="description" content="Nova Studio — Toshkentdagi raqamli mahsulot studiyasi. Veb-saytlar, mobil ilovalar, CRM/ERP va brending. 2019-yildan buyon 87 loyiha, 42 mijoz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;
+  --bg-2:#0b0f1a;
+  --surface:#101624;
+  --surface-2:#141c2e;
+  --line:#1e2740;
+  --line-2:#2a3654;
+  --txt:#eef2fb;
+  --txt-2:#9aa6c2;
+  --txt-3:#6b7794;
+  --accent:#5b8cff;
+  --accent-2:#7af0d0;
+  --accent-3:#ff8a5b;
+  --warn:#ffd166;
+  --radius:18px;
+  --radius-sm:12px;
+  --maxw:1200px;
+  --shadow:0 24px 60px -20px rgba(0,0,0,.75);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.65;letter-spacing:-.01em;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* ===== Layout ===== */
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.section{padding:110px 0;position:relative}
+.section--tight{padding:76px 0}
+.alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-2);
+  padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;
+  background:rgba(122,240,208,.05);margin-bottom:22px;
+}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 12px var(--accent-2)}
+h1,h2,h3,h4{line-height:1.12;letter-spacing:-.035em;font-weight:800}
+h2{font-size:clamp(30px,4.4vw,50px)}
+h3{font-size:clamp(19px,2.4vw,25px);letter-spacing:-.025em}
+.lead{color:var(--txt-2);font-size:clamp(16px,1.6vw,19px);max-width:64ch;line-height:1.72}
+.sec-head{max-width:780px;margin-bottom:54px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head.center .lead{margin-left:auto;margin-right:auto}
+.grad{background:linear-gradient(100deg,#fff 8%,var(--accent) 48%,var(--accent-2) 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.84em;letter-spacing:0}
+
+/* ===== Buttons ===== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 24px;border-radius:12px;border:1px solid transparent;
+  font-weight:700;font-size:15px;cursor:pointer;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,border-color .25s;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn--primary{background:linear-gradient(135deg,var(--accent),#3f6fe0);color:#fff;box-shadow:0 12px 30px -10px rgba(91,140,255,.65)}
+.btn--primary:hover{box-shadow:0 18px 42px -12px rgba(91,140,255,.85)}
+.btn--ghost{border-color:var(--line-2);background:rgba(255,255,255,.02);color:var(--txt)}
+.btn--ghost:hover{border-color:var(--accent);background:rgba(91,140,255,.08)}
+.btn--lg{padding:17px 30px;font-size:16px}
+.btn--block{width:100%}
+
+/* ===== Decor ===== */
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.grid-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;opacity:.3;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 25%,transparent 72%);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 25%,transparent 72%);
+}
+
+/* ===== Top bar + header ===== */
+.topbar{
+  background:linear-gradient(90deg,rgba(91,140,255,.14),rgba(122,240,208,.09));
+  border-bottom:1px solid var(--line);font-size:13.5px;color:var(--txt-2);
+}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:42px;flex-wrap:wrap}
+.topbar b{color:var(--txt)}
+.topbar-right{display:flex;gap:20px;align-items:center}
+
+header{position:sticky;top:0;z-index:70;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.stuck{background:rgba(7,9,15,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;min-height:74px;gap:24px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:-.04em}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;flex:0 0 36px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:grid;place-items:center;color:#07090f;font-size:18px;font-weight:800;
+  box-shadow:0 8px 22px -8px rgba(91,140,255,.8);
+}
+.logo small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;color:var(--txt-3);text-transform:uppercase;line-height:1.3}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{padding:9px 13px;border-radius:9px;font-size:14.5px;font-weight:600;color:var(--txt-2);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--txt);background:rgba(255,255,255,.05)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--line-2);border-radius:11px;background:transparent;cursor:pointer;position:relative}
+.burger i{position:absolute;left:11px;width:20px;height:2px;background:var(--txt);border-radius:2px;transition:.3s var(--ease)}
+.burger i:nth-child(1){top:14px}.burger i:nth-child(2){top:20px}.burger i:nth-child(3){top:26px}
+.burger.on i:nth-child(1){top:20px;transform:rotate(45deg)}
+.burger.on i:nth-child(2){opacity:0}
+.burger.on i:nth-child(3){top:20px;transform:rotate(-45deg)}
+.mobile-menu{display:none;border-top:1px solid var(--line);background:rgba(7,9,15,.97);backdrop-filter:blur(14px)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:14px 24px;border-bottom:1px solid var(--line);font-weight:600;color:var(--txt-2)}
+.mobile-menu .btn{margin:16px 24px;width:calc(100% - 48px)}
+
+/* ===== Hero ===== */
+.hero{position:relative;padding:92px 0 84px;overflow:hidden}
+.hero .g1{width:620px;height:620px;background:rgba(91,140,255,.2);top:-250px;left:-150px}
+.hero .g2{width:520px;height:520px;background:rgba(122,240,208,.13);top:-130px;right:-180px}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(37px,5.6vw,66px);margin-bottom:22px}
+.hero .lead{margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.hero-trust{display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:var(--txt-3);font-size:13.5px}
+.avatars{display:flex}
+.avatars span{width:38px;height:38px;border-radius:50%;margin-left:-11px;border:2px solid var(--bg);display:grid;place-items:center;font-size:13px;font-weight:800;color:#07090f}
+.avatars span:first-child{margin-left:0}
+.stars{color:var(--warn);letter-spacing:2px;font-size:14px}
+
+.mock{background:linear-gradient(170deg,var(--surface-2),var(--surface));border:1px solid var(--line-2);border-radius:20px;box-shadow:var(--shadow);overflow:visible;position:relative}
+.mock-inner{overflow:hidden;border-radius:20px}
+.mock-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.26)}
+.mock-bar i{width:11px;height:11px;border-radius:50%}
+.mock-bar i:nth-child(1){background:#ff5f57}.mock-bar i:nth-child(2){background:#febc2e}.mock-bar i:nth-child(3){background:#28c840}
+.mock-bar span{margin-left:10px;font-size:12px;color:var(--txt-3)}
+.mock-body{padding:22px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px}
+.kpi b{display:block;font-size:21px;letter-spacing:-.04em;line-height:1.25}
+.kpi small{display:block;font-size:11.5px;color:var(--txt-3);font-weight:600}
+.kpi em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--accent-2)}
+.chart{display:flex;align-items:flex-end;gap:8px;height:138px;padding:14px;background:rgba(0,0,0,.24);border:1px solid var(--line);border-radius:var(--radius-sm)}
+.chart div{flex:1;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,var(--accent),rgba(91,140,255,.16));animation:grow 1.1s var(--ease) both}
+.chart div:last-child{background:linear-gradient(180deg,var(--accent-2),rgba(122,240,208,.18))}
+@keyframes grow{from{height:0;opacity:0}}
+.chart-legend{display:flex;justify-content:space-between;font-size:11px;color:var(--txt-3);padding:9px 6px 0;font-weight:600}
+.float-badge{
+  position:absolute;background:rgba(16,22,36,.95);border:1px solid var(--line-2);
+  border-radius:13px;padding:11px 15px;font-size:13.5px;font-weight:700;display:flex;gap:10px;align-items:center;
+  box-shadow:var(--shadow);animation:bob 5.5s ease-in-out infinite;z-index:3;
+}
+.float-badge small{display:block;font-size:11px;color:var(--txt-3);font-weight:600}
+.fb-1{bottom:-22px;left:-26px}
+.fb-2{top:-20px;right:-22px;animation-delay:-2.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.dot-ok{width:9px;height:9px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2);flex:0 0 9px}
+
+/* ===== Logos ===== */
+.logos{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0;background:var(--bg-2)}
+.logos-inner{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+.logos p{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3);font-weight:700;margin-right:8px}
+.logo-chip{padding:9px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-weight:700;font-size:14.5px;color:var(--txt-2);letter-spacing:-.02em;transition:.25s}
+.logo-chip:hover{color:var(--txt);border-color:var(--line-2);transform:translateY(-2px)}
+
+/* ===== Stats ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.stat{background:var(--bg-2);padding:32px 26px;transition:background .3s}
+.stat:hover{background:var(--surface)}
+.stat b{display:block;font-size:clamp(31px,3.8vw,43px);letter-spacing:-.05em;line-height:1;margin-bottom:8px}
+.stat p{color:var(--txt-2);font-size:14.5px;font-weight:600}
+.stat small{display:block;color:var(--txt-3);font-size:12.5px;margin-top:3px}
+
+/* ===== Cards ===== */
+.cards{display:grid;gap:20px}
+.c2{grid-template-columns:repeat(2,1fr)}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;
+  position:relative;overflow:hidden;transition:transform .35s var(--ease),border-color .35s,background .35s;
+}
+.card:hover{transform:translateY(-5px);border-color:var(--line-2);background:var(--surface-2)}
+.card::after{
+  content:'';position:absolute;inset:0;border-radius:var(--radius);opacity:0;transition:opacity .35s;pointer-events:none;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,0%),rgba(91,140,255,.12),transparent 66%);
+}
+.card:hover::after{opacity:1}
+.ico{
+  width:50px;height:50px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;
+  background:linear-gradient(140deg,rgba(91,140,255,.18),rgba(122,240,208,.12));
+  border:1px solid var(--line-2);font-size:23px;
+}
+.card h3{margin-bottom:11px}
+.card>p{color:var(--txt-2);font-size:15px}
+.card ul{list-style:none;margin-top:18px;display:grid;gap:9px}
+.card ul li{font-size:14px;color:var(--txt-2);display:flex;gap:9px;align-items:flex-start}
+.card ul li::before{content:'✓';color:var(--accent-2);font-weight:800;flex:0 0 auto}
+.card-foot{margin-top:20px;padding-top:17px;border-top:1px dashed var(--line-2);font-size:13.5px;color:var(--txt-3);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card-foot b{color:var(--txt);font-size:16px;letter-spacing:-.03em}
+
+/* ===== Process ===== */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;position:relative;transition:.35s var(--ease)}
+.step:hover{transform:translateY(-5px);border-color:var(--accent)}
+.step-no{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:14px;
+  background:rgba(91,140,255,.14);border:1px solid var(--line-2);color:var(--accent);margin-bottom:16px;
+}
+.step h4{font-size:16.5px;margin-bottom:8px}
+.step p{font-size:13.8px;color:var(--txt-2);line-height:1.6}
+.step .dur{margin-top:14px;font-size:12px;font-weight:700;color:var(--accent-2);letter-spacing:.02em}
+
+/* ===== Cases ===== */
+.case{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;
+}
+.case:nth-child(even) .case-visual{order:2}
+.case-text{padding:40px}
+.case-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.case-text h3{margin-bottom:12px}
+.case-text p{color:var(--txt-2);font-size:15px;margin-bottom:22px}
+.case-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-top:20px;border-top:1px solid var(--line)}
+.case-metrics b{display:block;font-size:24px;letter-spacing:-.04em;color:var(--accent-2);line-height:1.2}
+.case-metrics small{font-size:12.5px;color:var(--txt-3);font-weight:600}
+.case-visual{background:linear-gradient(145deg,#15203a,#0d1322);display:grid;place-items:center;padding:34px;min-height:300px;position:relative}
+.case-visual .pane{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--line-2);border-radius:14px;padding:20px;backdrop-filter:blur(4px)}
+.pane-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.pane-row:last-child{border-bottom:0}
+.pane-row span{color:var(--txt-2)}
+.pane-row b{font-weight:700}
+.pill{padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:700}
+.pill--ok{background:rgba(122,240,208,.14);color:var(--accent-2)}
+.pill--warn{background:rgba(255,209,102,.14);color:var(--warn)}
+.pill--new{background:rgba(91,140,255,.16);color:#9db8ff}
+.bar-track{height:7px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-top:7px}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+/* ===== Pricing ===== */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;transition:.35s var(--ease);position:relative}
+.plan:hover{transform:translateY(-5px);border-color:var(--line-2)}
+.plan--hot{border-color:var(--accent);background:linear-gradient(175deg,rgba(91,140,255,.1),var(--surface) 42%);box-shadow:0 26px 60px -26px rgba(91,140,255,.5)}
+.plan-badge{position:absolute;top:-12px;left:32px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#07090f;font-size:11.5px;font-weight:800;padding:5px 13px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase}
+.plan h3{margin-bottom:6px}
+.plan>p{color:var(--txt-2);font-size:14px;margin-bottom:22px;min-height:42px}
+.plan-price{display:flex;align-items:baseline;gap:7px;margin-bottom:6px}
+.plan-price b{font-size:38px;letter-spacing:-.05em;line-height:1}
+.plan-price span{color:var(--txt-3);font-size:14px;font-weight:600}
+.plan-note{font-size:12.5px;color:var(--txt-3);margin-bottom:24px}
+.plan ul{list-style:none;display:grid;gap:11px;margin-bottom:28px;flex:1}
+.plan ul li{font-size:14px;color:var(--txt-2);display:flex;gap:10px;align-items:flex-start}
+.plan ul li::before{content:'✓';color:var(--accent-2);font-weight:800}
+.plan ul li.off{color:var(--txt-3);opacity:.62}
+.plan ul li.off::before{content:'—';color:var(--txt-3)}
+
+/* ===== Stack ===== */
+.stack{display:flex;flex-wrap:wrap;gap:10px}
+.tech{padding:10px 16px;border:1px solid var(--line);border-radius:11px;background:var(--surface);font-size:14px;font-weight:600;color:var(--txt-2);transition:.25s}
+.tech:hover{border-color:var(--accent);color:var(--txt);transform:translateY(-2px)}
+
+/* ===== Testimonials ===== */
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;gap:18px;transition:.35s var(--ease)}
+.quote:hover{transform:translateY(-5px);border-color:var(--line-2)}
+.quote p{color:var(--txt);font-size:15.5px;line-height:1.72;flex:1}
+.who{display:flex;align-items:center;gap:13px;padding-top:16px;border-top:1px solid var(--line)}
+.who .av{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#07090f;flex:0 0 44px}
+.who b{display:block;font-size:14.5px}
+.who small{color:var(--txt-3);font-size:12.5px}
+
+/* ===== Team ===== */
+.member{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;text-align:center;transition:.35s var(--ease)}
+.member:hover{transform:translateY(-5px);border-color:var(--line-2)}
+.member .av{width:72px;height:72px;border-radius:20px;margin:0 auto 16px;display:grid;place-items:center;font-size:24px;font-weight:800;color:#07090f}
+.member b{display:block;font-size:16px;letter-spacing:-.02em}
+.member small{color:var(--accent-2);font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.member p{color:var(--txt-3);font-size:13px;margin-top:10px}
+
+/* ===== FAQ ===== */
+.faq{max-width:860px;margin:0 auto;display:grid;gap:12px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .3s}
+.q[open]{border-color:var(--line-2)}
+.q summary{
+  padding:20px 24px;cursor:pointer;font-weight:700;font-size:16px;display:flex;justify-content:space-between;
+  gap:16px;align-items:center;list-style:none;transition:color .2s;
+}
+.q summary::-webkit-details-marker{display:none}
+.q summary:hover{color:var(--accent)}
+.q summary::after{content:'+';font-size:22px;font-weight:400;color:var(--accent);transition:transform .3s var(--ease);flex:0 0 auto}
+.q[open] summary::after{transform:rotate(45deg)}
+.q .a{padding:0 24px 22px;color:var(--txt-2);font-size:15px;line-height:1.72}
+
+/* ===== CTA / Form ===== */
+.cta-box{position:relative;overflow:hidden;border:1px solid var(--line-2);border-radius:26px;background:linear-gradient(150deg,#121c33,#0a0e1a 60%);padding:0}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative;z-index:2}
+.cta-left{padding:52px}
+.cta-left h2{margin-bottom:18px}
+.cta-left .lead{margin-bottom:28px}
+.contacts{display:grid;gap:14px;margin-top:28px;padding-top:26px;border-top:1px solid var(--line)}
+.contacts a,.contacts div{display:flex;gap:13px;align-items:center;font-size:14.5px;color:var(--txt-2);transition:color .2s}
+.contacts a:hover{color:var(--txt)}
+.contacts .ci{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--line);display:grid;place-items:center;flex:0 0 38px;font-size:16px}
+.contacts b{display:block;color:var(--txt);font-size:14.5px}
+.contacts small{color:var(--txt-3);font-size:12.5px}
+form{padding:52px;background:rgba(0,0,0,.26);border-left:1px solid var(--line)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--txt-2);margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line-2);
+  background:rgba(255,255,255,.03);font-size:15px;transition:border-color .25s,background .25s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:rgba(91,140,255,.06)}
+.field textarea{resize:vertical;min-height:92px}
+.field select option{background:var(--surface);color:var(--txt)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:12.5px;color:var(--txt-3);margin-top:14px;text-align:center}
+.ok-msg{display:none;padding:16px;border-radius:12px;background:rgba(122,240,208,.1);border:1px solid rgba(122,240,208,.35);color:var(--accent-2);font-size:14.5px;font-weight:600;margin-bottom:16px}
+.ok-msg.show{display:block}
+
+/* ===== Footer ===== */
+footer{background:var(--bg-2);border-top:1px solid var(--line);padding:64px 0 28px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:46px}
+.foot-grid p{color:var(--txt-3);font-size:14px;margin-top:16px;max-width:34ch}
+.foot-col h4{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3);margin-bottom:16px;font-weight:700}
+.foot-col a{display:block;color:var(--txt-2);font-size:14.5px;padding:5px 0;transition:color .2s}
+.foot-col a:hover{color:var(--accent)}
+.socials{display:flex;gap:10px;margin-top:20px}
+.socials a{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:15px;transition:.25s}
+.socials a:hover{border-color:var(--accent);transform:translateY(-2px)}
+.foot-bot{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--txt-3);font-size:13.5px}
+
+/* ===== Reveal animation ===== */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ===== Responsive ===== */
+@media (max-width:1024px){
+  .hero-grid,.cta-grid,.case,.case:nth-child(even) .case-visual{grid-template-columns:1fr;order:initial}
+  .c4,.c3,.price-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  form{border-left:0;border-top:1px solid var(--line)}
+  .nav-links{display:none}
+  .burger{display:block}
+  .plan--hot{transform:none}
+}
+@media (max-width:720px){
+  .section{padding:78px 0}
+  .c4,.c3,.c2,.price-grid,.steps,.stats{grid-template-columns:1fr}
+  .cta-left,form,.case-text{padding:32px 24px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .row2{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .hero{padding:56px 0 64px}
+  .fb-1{left:0;bottom:-18px}.fb-2{right:0;top:-16px}
+  .nav-cta .btn{display:none}
+  .topbar-right{display:none}
+  .case-metrics{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div>🇺🇿 Toshkent, Shayxontohur t., Navoiy ko'chasi 36A — <b>Ish vaqti: Du–Ju 09:00–19:00</b></div>
+    <div class="topbar-right">
+      <span>Navbatdagi bo'sh slot: <b>20-oktabr 2026</b></span>
+      <a href="tel:+998712005544"><b>+998 71 200 55 44</b></a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="hdr">
+  <div class="wrap">
+    <nav class="nav">
+      <a href="#top" class="logo">
+        <span class="logo-mark">N</span>
+        <span>Nova Studio<small>Raqamli mahsulotlar</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#xizmatlar">Xizmatlar</a>
+        <a href="#jarayon">Jarayon</a>
+        <a href="#loyihalar">Loyihalar</a>
+        <a href="#narxlar">Narxlar</a>
+        <a href="#jamoa">Jamoa</a>
+        <a href="#savollar">Savollar</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#aloqa" class="btn btn--ghost">Brif yuborish</a>
+        <a href="#aloqa" class="btn btn--primary">Bepul konsultatsiya</a>
+        <button class="burger" id="burger" aria-label="Menyu"><i></i><i></i><i></i></button>
+      </div>
+    </nav>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="#xizmatlar">Xizmatlar</a>
+    <a href="#jarayon">Jarayon</a>
+    <a href="#loyihalar">Loyihalar</a>
+    <a href="#narxlar">Narxlar</a>
+    <a href="#jamoa">Jamoa</a>
+    <a href="#savollar">Savollar</a>
+    <a href="#aloqa" class="btn btn--primary">Bepul konsultatsiya</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="grid-bg"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><i></i>2019-yildan buyon · 87 loyiha topshirildi</span>
+        <h1>Biznesingizni <span class="grad">daromad keltiruvchi</span> raqamli mahsulotga aylantiramiz</h1>
+        <p class="lead">
+          Nova Studio — veb-saytlar, mobil ilovalar va ichki CRM tizimlarini ishlab chiqadigan
+          Toshkentdagi studiya. Biz dizaynni emas, <b>o'lchanadigan natijani</b> topshiramiz:
+          konversiya, tezlik va avtomatlashtirilgan jarayonlar.
+        </p>
+        <div class="hero-actions">
+          <a href="#aloqa" class="btn btn--primary btn--lg">Loyihani muhokama qilish →</a>
+          <a href="#loyihalar" class="btn btn--ghost btn--lg">Keyslarni ko'rish</a>
+        </div>
+        <div class="hero-trust">
+          <div class="avatars">
+            <span style="background:linear-gradient(135deg,#5b8cff,#7af0d0)">AK</span>
+            <span style="background:linear-gradient(135deg,#ff8a5b,#ffd166)">DS</span>
+            <span style="background:linear-gradient(135deg,#7af0d0,#5b8cff)">MR</span>
+            <span style="background:linear-gradient(135deg,#b588ff,#5b8cff)">NT</span>
+            <span style="background:var(--surface-2);color:var(--txt);border-color:var(--line-2)">+38</span>
+          </div>
+          <div>
+            <div class="stars">★★★★★ <span style="color:var(--txt);font-weight:700">4.9/5</span></div>
+            <div>42 mijozning 38 tasi takroriy buyurtma bergan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock-inner">
+          <div class="mock-bar">
+            <i></i><i></i><i></i>
+            <span class="mono">nova-studio.uz/dashboard</span>
+          </div>
+          <div class="mock-body">
+            <div class="kpis">
+              <div class="kpi"><small>Konversiya</small><b>4.8%</b><em>↑ 2.3x</em></div>
+              <div class="kpi"><small>Yuklanish</small><b>0.9 s</b><em>↑ 68%</em></div>
+              <div class="kpi"><small>Oylik lid</small><b>1 240</b><em>↑ 41%</em></div>
+            </div>
+            <div class="chart">
+              <div style="height:34%"></div><div style="height:46%"></div><div style="height:41%"></div>
+              <div style="height:58%"></div><div style="height:69%"></div><div style="height:63%"></div>
+              <div style="height:81%"></div><div style="height:94%"></div>
+            </div>
+            <div class="chart-legend"><span>Mar</span><span>Apr</span><span>May</span><span>Iyn</span><span>Iyl</span><span>Avg</span><span>Sen</span><span>Okt</span></div>
+          </div>
+        </div>
+        <div class="float-badge fb-1"><span class="dot-ok"></span><div>Deploy muvaffaqiyatli<small>CI/CD · 12 daqiqa oldin</small></div></div>
+        <div class="float-badge fb-2">⚡<div>PageSpeed 98/100<small>Mobil · Lighthouse</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOGOS ===== -->
+<div class="logos">
+  <div class="wrap logos-inner">
+    <p>Bizga ishonadilar</p>
+    <div class="logo-chip">Oqtepa Lavash</div>
+    <div class="logo-chip">MedLine Clinic</div>
+    <div class="logo-chip">Zamin Agro</div>
+    <div class="logo-chip">Toshkent Mebel</div>
+    <div class="logo-chip">EduPro Academy</div>
+    <div class="logo-chip">Logimax Cargo</div>
+    <div class="logo-chip">Beauty Room</div>
+  </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<section class="section--tight section">
+  <div class="wrap">
+    <div class="stats rv">
+      <div class="stat"><b data-count="87" data-suffix="">0</b><p>Topshirilgan loyiha</p><small>2019 – 2026 (oktabr)</small></div>
+      <div class="stat"><b data-count="42" data-suffix="">0</b><p>Doimiy mijoz</p><small>Shundan 38 tasi takroriy</small></div>
+      <div class="stat"><b data-count="14" data-suffix=" kun">0</b><p>O'rtacha MVP muddati</p><small>Landing uchun 7 ish kuni</small></div>
+      <div class="stat"><b data-count="11" data-suffix="">0</b><p>Jamoa a'zosi</p><small>Dizayn · Dev · QA · PM</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== XIZMATLAR ===== -->
+<section class="section alt" id="xizmatlar">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Xizmatlar</span>
+      <h2>Bir joyda: strategiya, dizayn, ishlab chiqish</h2>
+      <p class="lead">Har bir xizmat alohida ham, to'liq paket ko'rinishida ham buyuriladi. Narxlar 2026-yil oktabr holatiga ko'ra, QQSsiz.</p>
+    </div>
+    <div class="cards c3">
+      <div class="card rv">
+        <div class="ico">🖥️</div>
+        <h3>Korporativ sayt va landing</h3>
+        <p>Konversiyaga yo'naltirilgan sahifalar. Yozuvdan analitikaga qadar to'liq yopiq tsikl.</p>
+        <ul>
+          <li>UX matn va taklif (offer) ishlab chiqish</li>
+          <li>Figma dizayn, 2 ta variant</li>
+          <li>Mobil-first, PageSpeed 90+</li>
+          <li>SEO bazasi + Yandex/Google analitika</li>
+        </ul>
+        <div class="card-foot"><span>Muddat: 7–14 kun</span><b>12 mln so'mdan</b></div>
+      </div>
+      <div class="card rv">
+        <div class="ico">📱</div>
+        <h3>Mobil ilovalar</h3>
+        <p>iOS va Android uchun bitta kod bazasi. Store'ga chiqarish ham biznikida.</p>
+        <ul>
+          <li>React Native / Flutter</li>
+          <li>Push, to'lov, xarita integratsiyasi</li>
+          <li>App Store va Google Play publikatsiya</li>
+          <li>3 oy bepul texnik qo'llab-quvvatlash</li>
+        </ul>
+        <div class="card-foot"><span>Muddat: 6–12 hafta</span><b>48 mln so'mdan</b></div>
+      </div>
+      <div class="card rv">
+        <div class="ico">⚙️</div>
+        <h3>CRM / ERP va avtomatlashtirish</h3>
+        <p>Excel va messenjerdagi tartibsizlikni bitta tizimga yig'amiz.</p>
+        <ul>
+          <li>Jarayonlarni audit qilish va xaritalash</li>
+          <li>Rollar, huquqlar, hisobotlar</li>
+          <li>Telegram-bot va 1C integratsiyasi</li>
+          <li>Xodimlarni o'qitish (2 sessiya)</li>
+        </ul>
+        <div class="card-foot"><span>Muddat: 8–16 hafta</span><b>65 mln so'mdan</b></div>
+      </div>
+      <div class="card rv">
+        <div class="ico">🛒</div>
+        <h3>E-commerce</h3>
+        <p>Click, Payme va Uzum Nasiya ulangan to'liq do'kon. Ombor bilan sinxron.</p>
+        <ul>
+          <li>Katalog, filtr, savat, buyurtma</li>
+          <li>Click / Payme / Uzum Nasiya</li>
+          <li>Yetkazib berish kalkulyatori</li>
+          <li>Admin panel va sotuv hisoboti</li>
+        </ul>
+        <div class="card-foot"><span>Muddat: 4–8 hafta</span><b>34 mln so'mdan</b></div>
+      </div>
+      <div class="card rv">
+        <div class="ico">🎨</div>
+        <h3>Brending va dizayn-tizim</h3>
+        <p>Logotipdan to komponent kutubxonasigacha — bitta vizual til.</p>
+        <ul>
+          <li>Logotip va firma uslubi</li>
+          <li>Brendbuk (PDF, 24+ sahifa)</li>
+          <li>Figma dizayn-tizimi</li>
+          <li>SMM shablonlari (20 ta)</li>
+        </ul>
+        <div class="card-foot"><span>Muddat: 3–5 hafta</span><b>18 mln so'mdan</b></div>
+      </div>
+      <div class="card rv">
+        <div class="ico">📈</div>
+        <h3>O'sish va qo'llab-quvvatlash</h3>
+        <p>Ishga tushirish — boshlanishi. Keyin raqamlar bilan ishlaymiz.</p>
+        <ul>
+          <li>A/B testlar, oyiga 2–4 gipoteza</li>
+          <li>Texnik SEO va tezlik optimizatsiyasi</li>
+          <li>Oylik hisobot va qo'ng'iroq</li>
+          <li>SLA: javob 4 soat ichida</li>
+        </ul>
+        <div class="card-foot"><span>Abonement</span><b>6 mln so'm/oy</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JARAYON ===== -->
+<section class="section" id="jarayon">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Qanday ishlaymiz</span>
+      <h2>5 bosqich — har birida aniq natija</h2>
+      <p class="lead">Har bosqich oxirida siz ko'rib, tasdiqlaydigan konkret hujjat yoki demo bo'ladi. “Keyin ko'rsatamiz” degan bosqich yo'q.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <div class="step-no">01</div>
+        <h4>Brif va audit</h4>
+        <p>Biznes maqsadi, raqobatchilar, hozirgi raqamlar. Natija: texnik topshiriq.</p>
+        <div class="dur">2–3 kun · bepul</div>
+      </div>
+      <div class="step rv">
+        <div class="step-no">02</div>
+        <h4>Prototip</h4>
+        <p>Sahifa strukturasi va foydalanuvchi yo'li. Natija: bosiladigan Figma prototip.</p>
+        <div class="dur">3–5 kun</div>
+      </div>
+      <div class="step rv">
+        <div class="step-no">03</div>
+        <h4>Dizayn</h4>
+        <p>Vizual konsepsiya, 2 variant, 3 bosqich tahrir. Natija: tayyor maketlar.</p>
+        <div class="dur">5–10 kun</div>
+      </div>
+      <div class="step rv">
+        <div class="step-no">04</div>
+        <h4>Ishlab chiqish</h4>
+        <p>Haftalik demo, test serverda kuzatish. Natija: ishlayotgan mahsulot.</p>
+        <div class="dur">2–8 hafta</div>
+      </div>
+      <div class="step rv">
+        <div class="step-no">05</div>
+        <h4>Ishga tushirish</h4>
+        <p>QA, analitika, o'qitish, kod topshirish. Natija: 30 kun kafolatli nazorat.</p>
+        <div class="dur">3–5 kun</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOYIHALAR ===== -->
+<section class="section alt" id="loyihalar">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Keyslar</span>
+      <h2>Natijalar raqamlarda</h2>
+      <p class="lead">Quyidagi ko'rsatkichlar ishga tushirilgandan keyingi 3 oy ichida mijozning analitika hisobotidan olingan (demo ma'lumotlar).</p>
+    </div>
+
+    <div class="case rv">
+      <div class="case-text">
+        <span class="case-tag">E-commerce · Oqtepa Lavash</span>
+        <h3>Yetkazib berish buyurtmasi saytdan 2.4 barobar oshdi</h3>
+        <p>Eski sayt mobil telefonda 6 sekundda yuklanardi va savatga o'tish 5 qadam edi. Biz buyurtma yo'lini 2 qadamga qisqartirdik, Click/Payme'ni bitta oynaga yig'dik va menyuni ombor bilan sinxronlashtirdik.</p>
+        <div class="case-metrics">
+          <div><b>+142%</b><small>Onlayn buyurtma</small></div>
+          <div><b>1.1 s</b><small>Yuklanish (oldin 6.2 s)</small></div>
+          <div><b>-31%</b><small>Savatni tashlab ketish</small></div>
+        </div>
+      </div>
+      <div class="case-visual">
+        <div class="pane">
+          <div class="pane-row"><span>Bugungi buyurtmalar</span><b>318</b></div>
+          <div class="pane-row"><span>O'rtacha chek</span><b>87 400 so'm</b></div>
+          <div class="pane-row"><span>To'lov: Click</span><span class="pill pill--ok">64%</span></div>
+          <div class="pane-row"><span>To'lov: Payme</span><span class="pill pill--new">29%</span></div>
+          <div class="pane-row"><span>Naqd (kuryer)</span><span class="pill pill--warn">7%</span></div>
+          <div style="margin-top:14px">
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--txt-3);font-weight:600"><span>Oylik maqsad</span><span>83%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:83%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case rv">
+      <div class="case-text">
+        <span class="case-tag">CRM · MedLine Clinic</span>
+        <h3>Qabulga yozilish qo'ng'iroqsiz, administratorsiz</h3>
+        <p>7 shifokorning jadvali qog'ozda yuritilardi, kunda ~90 qo'ng'iroq. Onlayn yozilish, SMS eslatma va shifokor kabineti bilan yagona tizim qurdik. Administrator vaqti hisobot va nazoratga o'tdi.</p>
+        <div class="case-metrics">
+          <div><b>-68%</b><small>Kiruvchi qo'ng'iroq</small></div>
+          <div><b>-24%</b><small>Kelmay qolish (no-show)</small></div>
+          <div><b>4.1 soat</b><small>Kunda tejalgan vaqt</small></div>
+        </div>
+      </div>
+      <div class="case-visual">
+        <div class="pane">
+          <div class="pane-row"><span>Bugun qabullar</span><b>46 / 52</b></div>
+          <div class="pane-row"><span>Onlayn yozilgan</span><span class="pill pill--ok">71%</span></div>
+          <div class="pane-row"><span>SMS eslatma yuborildi</span><b>46</b></div>
+          <div class="pane-row"><span>Bo'sh slot (ertaga)</span><span class="pill pill--new">9</span></div>
+          <div class="pane-row"><span>Tasdiqlanmagan</span><span class="pill pill--warn">3</span></div>
+          <div style="margin-top:14px">
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--txt-3);font-weight:600"><span>Jadval to'ldirilishi</span><span>88%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case rv">
+      <div class="case-text">
+        <span class="case-tag">Mobil ilova · Logimax Cargo</span>
+        <h3>Yuk haydovchilari uchun ilova: qog'ozdan smartfonga</h3>
+        <p>Reys hujjatlari, yoqilg'i cheklari va yetkazish tasdiqlari qo'lda yig'ilardi. Oflayn ishlaydigan ilova qildik: internet qaytganda ma'lumot o'zi sinxronlashadi.</p>
+        <div class="case-metrics">
+          <div><b>2 400+</b><small>Oylik reys</small></div>
+          <div><b>-55%</b><small>Hujjat xatolari</small></div>
+          <div><b>4.7★</b><small>Play Market reytingi</small></div>
+        </div>
+      </div>
+      <div class="case-visual">
+        <div class="pane">
+          <div class="pane-row"><span>Yo'ldagi reyslar</span><b>37</b></div>
+          <div class="pane-row"><span>Bugun topshirildi</span><span class="pill pill--ok">112</span></div>
+          <div class="pane-row"><span>Oflayn navbatda</span><span class="pill pill--warn">4</span></div>
+          <div class="pane-row"><span>O'rtacha kechikish</span><b>18 daqiqa</b></div>
+          <div class="pane-row"><span>Faol haydovchi</span><b>86</b></div>
+          <div style="margin-top:14px">
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--txt-3);font-weight:600"><span>Vaqtida yetkazish</span><span>94%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:94%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NIMA UCHUN BIZ ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Nima uchun Nova Studio</span>
+      <h2>Agentliklar bilan bo'ladigan 4 muammoni yopdik</h2>
+    </div>
+    <div class="cards c4">
+      <div class="card rv">
+        <div class="ico">📄</div>
+        <h3>Fiksirlangan shartnoma</h3>
+        <p>Narx va muddat shartnomada qat'iy. Kechiksak — har kun uchun 0.5% chegirma, bu ham shartnomada yozilgan.</p>
+      </div>
+      <div class="card rv">
+        <div class="ico">👁️</div>
+        <h3>Haftalik demo</h3>
+        <p>Har juma 30 daqiqalik qo'ng'iroq va test serverga havola. Oxirida "kutganimdek emas" bo'lmaydi.</p>
+      </div>
+      <div class="card rv">
+        <div class="ico">🔑</div>
+        <h3>Kod sizniki</h3>
+        <p>GitHub repozitoriy, domen, server va barcha akkauntlar sizning nomingizda. Biz hech narsani "garovda" tutmaymiz.</p>
+      </div>
+      <div class="card rv">
+        <div class="ico">🛡️</div>
+        <h3>6 oy kafolat</h3>
+        <p>Topshirilgandan keyin bizning aybimiz bilan chiqqan har qanday xato bepul tuzatiladi. Muddat cheklovi yo'q.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NARXLAR ===== -->
+<section class="section alt" id="narxlar">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="eyebrow"><i></i>Narxlar</span>
+      <h2>Shaffof paketlar</h2>
+      <p class="lead">Narxlar 2026-yil oktabr holatiga ko'ra, QQSsiz ko'rsatilgan. To'lov: 50% boshida, 50% topshirishda. Bo'lib to'lash mumkin.</p>
+    </div>
+    <div class="price-grid">
+      <div class="plan rv">
+        <h3>Start</h3>
+        <p>Yangi boshlanayotgan biznes va bitta mahsulot uchun landing.</p>
+        <div class="plan-price"><b>12</b><span>mln so'mdan</span></div>
+        <div class="plan-note">Muddat: 7 ish kuni</div>
+        <ul>
+          <li>1 sahifali landing (6–8 blok)</li>
+          <li>Tayyor shablon asosida dizayn</li>
+          <li>Mobil va planshet moslashuv</li>
+          <li>Telegram'ga lid yuborish</li>
+          <li>Google Analytics 4 ulanishi</li>
+          <li class="off">Noldan dizayn konsepsiyasi</li>
+          <li class="off">Admin panel</li>
+          <li class="off">Integratsiyalar</li>
+        </ul>
+        <a href="#aloqa" class="btn btn--ghost btn--block">Tanlash</a>
+      </div>
+
+      <div class="plan plan--hot rv">
+        <span class="plan-badge">Eng ko'p tanlanadi</span>
+        <h3>Business</h3>
+        <p>Aktiv sotuvchi kompaniyalar uchun to'liq korporativ sayt.</p>
+        <div class="plan-price"><b>34</b><span>mln so'mdan</span></div>
+        <div class="plan-note">Muddat: 3–4 hafta</div>
+        <ul>
+          <li>5–12 sahifa, noldan dizayn (2 variant)</li>
+          <li>Kontent-menejment tizimi (CMS)</li>
+          <li>Blog va yangiliklar bo'limi</li>
+          <li>Ko'p tilli: o'zbek / rus / ingliz</li>
+          <li>Texnik SEO va PageSpeed 90+</li>
+          <li>CRM va Telegram-bot integratsiyasi</li>
+          <li>1 oy bepul kontent qo'llab-quvvatlash</li>
+          <li class="off">Mobil ilova</li>
+        </ul>
+        <a href="#aloqa" class="btn btn--primary btn--block">Tanlash</a>
+      </div>
+
+      <div class="plan rv">
+        <h3>Enterprise</h3>
+        <p>Murakkab tizimlar, ichki platformalar va mobil ilovalar.</p>
+        <div class="plan-price"><b>65</b><span>mln so'mdan</span></div>
+        <div class="plan-note">Muddat: kelishiladi · 8 haftadan</div>
+        <ul>
+          <li>Biznes-jarayonlar auditi</li>
+          <li>Veb + mobil ilova (iOS/Android)</li>
+          <li>CRM / ERP va rollar tizimi</li>
+          <li>1C, Payme, Click, SMS integratsiyasi</li>
+          <li>Yuklama testlari va monitoring</li>
+          <li>Shaxsiy loyiha menejeri</li>
+          <li>SLA bilan qo'llab-quvvatlash (4 soat)</li>
+          <li>Xodimlarni o'qitish va hujjatlar</li>
+        </ul>
+        <a href="#aloqa" class="btn btn--ghost btn--block">Taklif so'rash</a>
+      </div>
+    </div>
+    <p class="form-note rv" style="margin-top:26px">
+      Byudjetingiz paketlarga to'g'ri kelmayapti? Yozing — ishning hajmini maqsadga qarab qisqartirib, bosqichma-bosqich reja tuzamiz.
+    </p>
+  </div>
+</section>
+
+<!-- ===== STACK ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Texnologiyalar</span>
+      <h2>Zamonaviy va qo'llab-quvvatlanadigan stek</h2>
+      <p class="lead">Biz “moda”ga emas, uzoq muddat yashaydigan va bozorda mutaxassis topiladigan texnologiyalarga tayanamiz — keyinchalik loyihani boshqa jamoa ham davom ettira oladi.</p>
+    </div>
+    <div class="stack rv">
+      <div class="tech">TypeScript</div><div class="tech">React</div><div class="tech">Next.js</div>
+      <div class="tech">Vue / Nuxt</div><div class="tech">Node.js</div><div class="tech">NestJS</div>
+      <div class="tech">Python / Django</div><div class="tech">PostgreSQL</div><div class="tech">Redis</div>
+      <div class="tech">React Native</div><div class="tech">Flutter</div><div class="tech">Docker</div>
+      <div class="tech">Kubernetes</div><div class="tech">GitHub Actions</div><div class="tech">Figma</div>
+      <div class="tech">Payme / Click API</div><div class="tech">1C integratsiya</div><div class="tech">Grafana</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Mijozlar fikri</span>
+      <h2>Ular bilan ishlaganmiz</h2>
+    </div>
+    <div class="cards c3">
+      <div class="quote rv">
+        <div class="stars">★★★★★</div>
+        <p>“Eng muhimi — haftalik demo. Biz har juma nima qilinganini ko'rib turdik, shuning uchun oxirida hech qanday kutilmagan narsa bo'lmadi. Sayt ishga tushgandan keyin onlayn buyurtma ikki barobardan ko'p oshdi.”</p>
+        <div class="who">
+          <span class="av" style="background:linear-gradient(135deg,#5b8cff,#7af0d0)">AK</span>
+          <div><b>Aziz Karimov</b><small>Marketing direktori · Oqtepa Lavash</small></div>
+        </div>
+      </div>
+      <div class="quote rv">
+        <div class="stars">★★★★★</div>
+        <p>“Klinika uchun CRM qildilar. Administratorlarimiz kuniga 90 ga yaqin qo'ng'iroqni qabul qilardi — hozir bu uch barobar kamaydi. Xodimlarni o'qitishni ham o'zlari o'tkazdi, biz faqat ishlatdik.”</p>
+        <div class="who">
+          <span class="av" style="background:linear-gradient(135deg,#ff8a5b,#ffd166)">DS</span>
+          <div><b>Dilnoza Saidova</b><small>Bosh shifokor · MedLine Clinic</small></div>
+        </div>
+      </div>
+      <div class="quote rv">
+        <div class="stars">★★★★★</div>
+        <p>“Bizdan oldin ikkita jamoa ilovani tashlab ketgan edi. Nova Studio eski kodni qabul qildi, hujjatlashtirdi va 9 haftada Play Market'ga chiqardi. Repozitoriy birinchi kundan bizning akkauntimizda bo'ldi.”</p>
+        <div class="who">
+          <span class="av" style="background:linear-gradient(135deg,#7af0d0,#5b8cff)">MR</span>
+          <div><b>Murod Rahimov</b><small>Operatsion direktor · Logimax Cargo</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JAMOA ===== -->
+<section class="section" id="jamoa">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><i></i>Jamoa</span>
+      <h2>Loyihangiz ustida kim ishlaydi</h2>
+      <p class="lead">Subpudratchi yo'q — hamma studiyada ishlaydi. Siz birinchi kundan kim bilan gaplashayotganingizni bilasiz.</p>
+    </div>
+    <div class="cards c4">
+      <div class="member rv">
+        <div class="av" style="background:linear-gradient(135deg,#5b8cff,#7af0d0)">SA</div>
+        <b>Sardor Alimov</b><small>Hammuassis · Strategiya</small>
+        <p>12 yil tajriba. Brif va texnik topshiriqni o'zi yuritadi.</p>
+      </div>
+      <div class="member rv">
+        <div class="av" style="background:linear-gradient(135deg,#b588ff,#5b8cff)">NT</div>
+        <b>Nilufar Toshpulatova</b><small>Bosh dizayner</small>
+        <p>UX/UI, dizayn-tizimlar. 40+ loyiha interfeysi muallifi.</p>
+      </div>
+      <div class="member rv">
+        <div class="av" style="background:linear-gradient(135deg,#7af0d0,#39c9a5)">JU</div>
+        <b>Jasur Umarov</b><small>Tech Lead</small>
+        <p>TypeScript, Node.js, arxitektura va kod sifati nazorati.</p>
+      </div>
+      <div class="member rv">
+        <div class="av" style="background:linear-gradient(135deg,#ff8a5b,#ffd166)">KA</div>
+        <b>Kamola Abdullayeva</b><small>Loyiha menejeri</small>
+        <p>Muddat, demo qo'ng'iroqlari va hisobotlar — sizning aloqa nuqtangiz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section alt" id="savollar">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="eyebrow"><i></i>Savol-javob</span>
+      <h2>Ko'p beriladigan savollar</h2>
+    </div>
+    <div class="faq">
+      <details class="q rv" open>
+        <summary>Narx nimaga qarab belgilanadi?</summary>
+        <div class="a">Ish hajmiga: sahifalar soni, noldan dizayn kerakmi yoki shablon, integratsiyalar (to'lov, 1C, CRM) va kontent kim tomonidan tayyorlanadi. Brifdan keyin 2 ish kuni ichida bosqichlarga bo'lingan aniq smeta yuboramiz — shundan keyin narx shartnomada fiksirlanadi va o'zgarmaydi.</div>
+      </details>
+      <details class="q rv">
+        <summary>To'lov qanday amalga oshiriladi?</summary>
+        <div class="a">Standart shart: 50% ishni boshlashda, 50% topshirishda. 34 mln so'mdan oshiq loyihalarda to'lovni 3–4 bosqichga bo'lish mumkin — har bosqich tugagan ishga bog'lanadi. Yuridik shaxslar uchun hisob-faktura va shartnoma rasmiylashtiriladi.</div>
+      </details>
+      <details class="q rv">
+        <summary>Kontentni (matn, rasm) kim tayyorlaydi?</summary>
+        <div class="a">Business va Enterprise paketlarida asosiy sahifalar matnini biz yozamiz — siz faqat faktlarni beradigan 40 daqiqalik qo'ng'iroq o'tkazasiz. Professional fotosessiya alohida xizmat (4 mln so'mdan). Start paketida matnni mijoz beradi, biz uni tahrirlaymiz.</div>
+      </details>
+      <details class="q rv">
+        <summary>Ishga tushirgandan keyin o'zim boshqara olamanmi?</summary>
+        <div class="a">Ha. CMS orqali matn, rasm, narx va blogni mustaqil o'zgartirasiz. Topshirishda 2 ta o'qitish sessiyasi o'tkazamiz va o'zbek tilidagi video qo'llanma beramiz. Texnik ishlar uchun abonement ixtiyoriy.</div>
+      </details>
+      <details class="q rv">
+        <summary>Boshqa jamoa boshlagan loyihani davom ettirasizmi?</summary>
+        <div class="a">Ha, lekin avval kod auditi kerak (3–5 ish kuni, 4 mln so'm). Audit natijasida nima tuzatish va nima qayta yozish kerakligini aniq hisob-kitob bilan ko'rsatamiz. Agar audit keyin bizda davom etsa, uning narxi umumiy smetadan chegiriladi.</div>
+      </details>
+      <details class="q rv">
+        <summary>Domen va hosting kim nomiga olinadi?</summary>
+        <div class="a">Hammasi mijoz nomiga. Domen, server, to'lov tizimi va analitika akkauntlari sizning rekvizitlaringizda ro'yxatga olinadi, biz esa kirish huquqini olamiz. Kod GitHub'da sizning tashkilotingiz ostida saqlanadi.</div>
+      </details>
+      <details class="q rv">
+        <summary>Kafolat nimani qamrab oladi?</summary>
+        <div class="a">Topshirilgandan keyin 6 oy ichida bizning ishimiz tufayli yuzaga kelgan har qanday xato bepul tuzatiladi. Kafolat yangi funksiyalar, mijoz tomonidan o'zgartirilgan kod yoki uchinchi tomon servisi (masalan, to'lov shlyuzi) nosozligini qamramaydi.</div>
+      </details>
+      <details class="q rv">
+        <summary>Toshkentdan tashqaridagi mijozlar bilan ishlaysizmi?</summary>
+        <div class="a">Ha. Loyihalarimizning qariyb yarmi masofadan yuritiladi — Samarqand, Namangan, Nukus va Qozog'iston mijozlari bor. Jarayon bir xil: Telegram/Zoom orqali aloqa, haftalik demo, shartnoma elektron imzo bilan.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA / ALOQA ===== -->
+<section class="section" id="aloqa">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <div class="grid-bg" style="opacity:.2"></div>
+      <div class="cta-grid">
+        <div class="cta-left">
+          <span class="eyebrow"><i></i>Bepul konsultatsiya</span>
+          <h2>30 daqiqada loyihangizni hisoblab beramiz</h2>
+          <p class="lead">Formani to'ldirasiz — ish kuni ichida qo'ng'iroq qilamiz, savollar beramiz va taxminiy narx bilan muddatni aytamiz. Hech qanday majburiyat yo'q, “keyin bezor qilish” ham yo'q.</p>
+          <div class="contacts">
+            <a href="tel:+998712005544"><span class="ci">📞</span><span><b>+998 71 200 55 44</b><small>Du–Ju, 09:00–19:00</small></span></a>
+            <a href="https://t.me/novastudio_uz"><span class="ci">✈️</span><span><b>@novastudio_uz</b><small>Telegram — eng tez javob</small></span></a>
+            <a href="mailto:salom@nova-studio.uz"><span class="ci">✉️</span><span><b>salom@nova-studio.uz</b><small>Brif va takliflar uchun</small></span></a>
+            <div><span class="ci">📍</span><span><b>Navoiy ko'chasi 36A, 4-qavat</b><small>Shayxontohur tumani, Toshkent</small></span></div>
+          </div>
+        </div>
+        <form id="leadForm" novalidate>
+          <div class="ok-msg" id="okMsg">✓ Rahmat! So'rovingiz qabul qilindi. Ish kuni ichida bog'lanamiz. <span style="display:block;font-weight:400;margin-top:4px;color:var(--txt-2)">(Bu demo sahifa — ma'lumot hech qayerga yuborilmadi.)</span></div>
+          <div class="row2">
+            <div class="field">
+              <label for="nm">Ismingiz *</label>
+              <input id="nm" name="nm" type="text" placeholder="Aziz Karimov" required>
+            </div>
+            <div class="field">
+              <label for="ph">Telefon *</label>
+              <input id="ph" name="ph" type="tel" placeholder="+998 90 123 45 67" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cm">Kompaniya va yo'nalish</label>
+            <input id="cm" name="cm" type="text" placeholder="Masalan: Zamin Agro — qishloq xo'jaligi">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="sv">Kerakli xizmat</label>
+              <select id="sv" name="sv">
+                <option>Landing / korporativ sayt</option>
+                <option>Internet-do'kon</option>
+                <option>Mobil ilova</option>
+                <option>CRM / ERP tizimi</option>
+                <option>Brending va dizayn</option>
+                <option>Qo'llab-quvvatlash va o'sish</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bd">Byudjet</label>
+              <select id="bd" name="bd">
+                <option>12–20 mln so'm</option>
+                <option>20–40 mln so'm</option>
+                <option>40–80 mln so'm</option>
+                <option>80 mln so'mdan yuqori</option>
+                <option>Hali aniq emas</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="ms">Loyiha haqida qisqacha</label>
+            <textarea id="ms" name="ms" placeholder="Hozir qanday muammo bor va qanday natija kutayotganingizni yozing."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg btn--block">So'rov yuborish</button>
+          <p class="form-note">Ma'lumotlaringiz uchinchi shaxslarga berilmaydi. Yuborish bilan <a href="#" style="color:var(--accent-2)">maxfiylik siyosati</a>ga rozilik bildirasiz.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">
+          <span class="logo-mark">N</span>
+          <span>Nova Studio<small>Raqamli mahsulotlar</small></span>
+        </a>
+        <p>Toshkentdagi raqamli mahsulot studiyasi. 2019-yildan buyon biznesni o'lchanadigan natijaga olib boradigan saytlar, ilovalar va tizimlar qurib kelmoqdamiz.</p>
+        <div class="socials">
+          <a href="https://t.me/novastudio_uz" aria-label="Telegram">✈️</a>
+          <a href="https://instagram.com/novastudio.uz" aria-label="Instagram">📷</a>
+          <a href="https://linkedin.com" aria-label="LinkedIn">in</a>
+          <a href="https://github.com" aria-label="GitHub">⌨️</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Xizmatlar</h4>
+        <a href="#xizmatlar">Korporativ sayt</a>
+        <a href="#xizmatlar">Internet-do'kon</a>
+        <a href="#xizmatlar">Mobil ilovalar</a>
+        <a href="#xizmatlar">CRM / ERP</a>
+        <a href="#xizmatlar">Brending</a>
+      </div>
+      <div class="foot-col">
+        <h4>Studiya</h4>
+        <a href="#loyihalar">Keyslar</a>
+        <a href="#jamoa">Jamoa</a>
+        <a href="#jarayon">Ish jarayoni</a>
+        <a href="#narxlar">Narxlar</a>
+        <a href="#savollar">Savol-javob</a>
+      </div>
+      <div class="foot-col">
+        <h4>Aloqa</h4>
+        <a href="tel:+998712005544">+998 71 200 55 44</a>
+        <a href="mailto:salom@nova-studio.uz">salom@nova-studio.uz</a>
+        <a href="https://t.me/novastudio_uz">@novastudio_uz</a>
+        <a href="#aloqa">Brif yuborish</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2019–2026 Nova Studio MChJ · STIR 123456789</span>
+      <span>Bu sahifa demo maqsadida tayyorlangan — kompaniya va ko'rsatkichlar shartli.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky header
+var hdr = document.getElementById('hdr');
+function onScroll(){ hdr.classList.toggle('stuck', window.scrollY > 10); }
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+// Mobile menu
+var burger = document.getElementById('burger');
+var mmenu  = document.getElementById('mmenu');
+burger.addEventListener('click', function(){
+  burger.classList.toggle('on');
+  mmenu.classList.toggle('open');
+});
+mmenu.addEventListener('click', function(e){
+  if (e.target.tagName === 'A'){ burger.classList.remove('on'); mmenu.classList.remove('open'); }
+});
+
+// Reveal on scroll
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+  });
+}, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(function(el, i){
+  el.style.transitionDelay = (i % 4) * 70 + 'ms';
+  io.observe(el);
+});
+
+// Counting stats
+var counted = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if (!en.isIntersecting) return;
+    var el = en.target, target = parseFloat(el.dataset.count), suffix = el.dataset.suffix || '';
+    var start = performance.now(), dur = 1300;
+    function tick(now){
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    counted.unobserve(el);
+  });
+}, {threshold:.5});
+document.querySelectorAll('[data-count]').forEach(function(el){ counted.observe(el); });
+
+// Card hover spotlight
+document.querySelectorAll('.card').forEach(function(c){
+  c.addEventListener('mousemove', function(e){
+    var r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+});
+
+// FAQ: faqat bittasi ochiq turadi
+var qs = document.querySelectorAll('.faq .q');
+qs.forEach(function(q){
+  q.addEventListener('toggle', function(){
+    if (q.open) qs.forEach(function(o){ if (o !== q) o.open = false; });
+  });
+});
+
+// Demo form
+document.getElementById('leadForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var nm = document.getElementById('nm'), ph = document.getElementById('ph');
+  if (!nm.value.trim()){ nm.focus(); nm.style.borderColor = '#ff5f57'; return; }
+  if (!ph.value.trim()){ ph.focus(); ph.style.borderColor = '#ff5f57'; return; }
+  nm.style.borderColor = ''; ph.style.borderColor = '';
+  document.getElementById('okMsg').classList.add('show');
+  this.reset();
+  document.getElementById('okMsg').scrollIntoView({behavior:'smooth', block:'center'});
+});
+</script>
+</body>
+</html>
